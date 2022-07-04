@@ -24,7 +24,7 @@ const timer = (deadline) => {
   const getTimeRemaining = () => {
     const dateStop = new Date(deadline).getTime();
     const dateNow = Date.now();
-    const moscTime = new Date().toLocaleString('ru-RU',
+    const moscTime = new Date().toLocaleString('en-US',
         {timeZone: 'Europe/Moscow'});
     const nowMosc = Date.parse(moscTime);
     const timeRemaining = dateStop - dateNow;
