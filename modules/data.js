@@ -39,20 +39,32 @@ tourForm.addEventListener('change', async () => {
   const strDate = tourDate.value;
   const data = await loadGoods();
   const optItem = tourPeople.querySelectorAll('.tour__option');
-  if (optItem[1]) {
-    optItem[1].remove();
-  }
   const result = data.filter(item => item.date === strDate);
+  if (optItem[1]) {
+    if (optItem[1].value != result[0]['min-people'] || 
+    optItem[optItem.length - 1].value != result[0]['max-people']) {
+      console.log(`${optItem[1].value} ${result[0]['min-people']}`);
+      optItem.forEach(item => {
+        item.remove();
+      });
+      tourPeople.insertAdjacentHTML('beforeend', `
+        <option value="" selected class="tour__option">
+          Количество человек
+        </option>
+      `);
+    }
+  }
   if (result) {
     result.forEach(element => {
-      const opt = document.createElement('option');
-      opt.classList.add('tour__option');
-      opt.value = `${element['min-people']} - ${element['max-people']}`;
-      opt.textContent = `
-        от ${element['min-people']} до ${element['max-people']}
-      `;
-      opt.selected = true;
-      tourPeople.append(opt);
+      for (let i = element['min-people']; i <= element['max-people']; i++) {
+        const opt = document.createElement('option');
+        opt.classList.add('tour__option');
+        opt.value = `${i}`;
+        opt.textContent = `
+          ${i}
+        `;
+        tourPeople.append(opt);
+      }
     });
   }
 });
@@ -65,26 +77,38 @@ reservationForm.addEventListener('change', async () => {
   }
   const data = await loadGoods();
   const optItem = reservationPeople.querySelectorAll('.tour__option');
-  if (optItem[1]) {
-    optItem[1].remove();
-  }
   const result = data.filter(item => item.date === strDate);
+  if (optItem[1]) {
+    if (optItem[1].value != result[0]['min-people'] || 
+    optItem[optItem.length - 1].value != result[0]['max-people']) {
+      console.log(`${optItem[1].value} ${result[0]['min-people']}`);
+      optItem.forEach(item => {
+        item.remove();
+      });
+      reservationPeople.insertAdjacentHTML('beforeend', `
+        <option value="" selected class="tour__option reservation__option">
+          Количество человек
+        </option>
+      `);
+    }
+  }
   if (result) {
     result.forEach(element => {
-      const opt = document.createElement('option');
-      opt.classList.add('tour__option', 'reservation__option');
-      opt.value = `${element['min-people']} - ${element['max-people']}`;
-      opt.textContent = `
-        от ${element['min-people']} до ${element['max-people']}
-      `;
-      opt.selected = true;
-      reservationPeople.append(opt);
+      for (let i = element['min-people']; i <= element['max-people']; i++) {
+        const opt = document.createElement('option');
+        opt.classList.add('tour__option', 'reservation__option');
+        opt.value = `${i}`;
+        opt.textContent = `
+          ${i}
+        `;
+        reservationPeople.append(opt);
+      }
     });
     const objItem = result[0];
-    reservationPrice.textContent = `${objItem.price}₽`;
+    reservationPrice.textContent = `${objItem.price * reservationPeople.value}₽`;
     dataBottom.textContent = `
       ${objItem.date},
-      от ${objItem['min-people']} до ${objItem['max-people']} человек
+      ${reservationPeople.value} человек
     `;
   }
 });
