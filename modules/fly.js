@@ -24,6 +24,6 @@ if (screenWidth > 758) {
     requestAnimationFrame(calcPositionFly);
   });
   calcPositionFly();
-};
+}
 
 
