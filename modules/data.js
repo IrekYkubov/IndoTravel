@@ -79,7 +79,7 @@ reservationForm.addEventListener('change', async () => {
   const optItem = reservationPeople.querySelectorAll('.tour__option');
   const result = data.filter(item => item.date === strDate);
   if (optItem[1]) {
-    if (optItem[1].value != result[0]['min-people'] || 
+    if (optItem[1].value != result[0]['min-people'] ||
     optItem[optItem.length - 1].value != result[0]['max-people']) {
       console.log(`${optItem[1].value} ${result[0]['min-people']}`);
       optItem.forEach(item => {
@@ -105,7 +105,9 @@ reservationForm.addEventListener('change', async () => {
       }
     });
     const objItem = result[0];
-    reservationPrice.textContent = `${objItem.price * reservationPeople.value}₽`;
+    reservationPrice.textContent = `
+      ${objItem.price * reservationPeople.value}₽
+    `;
     dataBottom.textContent = `
       ${objItem.date},
       ${reservationPeople.value} человек
