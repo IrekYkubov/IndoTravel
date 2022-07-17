@@ -14,7 +14,7 @@ if (screenWidth > 758) {
   document.body.append(fly);
 
   const calcPositionFly = () => {
-    const maxHeight = docEl.scrollHeight - fly.clientHeight;
+    const maxHeight = docEl.clientHeight - fly.clientHeight;
     const maxScroll = docEl.scrollHeight - docEl.clientHeight;
     const procentScroll = (window.scrollY * 100) / maxScroll;
     const bottom = maxHeight * (procentScroll / 100);
