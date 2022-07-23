@@ -11,6 +11,10 @@ const reservationData = reservationForm.querySelector('.reservation__data');
 const footerForm = document.querySelector('.footer__form');
 const URL = 'https://jsonplaceholder.typicode.com/posts';
 
+reservationName.addEventListener('input', () => {
+  reservationName.value = reservationName.value.replace(/\d/g, '');
+})
+
 const httpRequest = (url, {
   method = 'GET',
   callback,
@@ -51,6 +55,10 @@ reservationButton.addEventListener('click', async (e) => {
     phone: reservationForm.phone.value,
   };
   e.preventDefault();
+  if (/([A-Za-zА-Яа-яЁё]{2,30})(\s)([A-Za-zА-Яа-яЁё]{2,30})(\s)([A-Za-zА-Яа-яЁё]{2,30})/.test(reservationName.value) === false) {
+    reservationData.textContent = 'Заполните ФИО корректно';
+    return;
+  }
   if (inform.date && inform.price && inform.people && inform.phone) {
     showModal('', inform);
   } else {
