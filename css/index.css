@@ -1476,6 +1476,7 @@ p {
 
 .album__slider {
 		position: relative;
+		overflow: hidden;
 }
 
 .album__item {
@@ -1508,7 +1509,9 @@ p {
 		transform: translateY(-50%) rotate(180deg);
 		background: url("../img/album/arrow-right-active.svg") center/contain no-repeat;
 }
-
+.album__image {
+	width: 100%;
+}
 .album__right {
 		position: absolute;
 		content: "";

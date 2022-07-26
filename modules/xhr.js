@@ -13,7 +13,7 @@ const URL = 'https://jsonplaceholder.typicode.com/posts';
 
 reservationName.addEventListener('input', () => {
   reservationName.value = reservationName.value.replace(/\d/g, '');
-})
+});
 
 const httpRequest = (url, {
   method = 'GET',
