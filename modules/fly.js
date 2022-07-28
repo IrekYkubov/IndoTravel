@@ -10,6 +10,7 @@ if (screenWidth > 758) {
     bottom: 0;
     pointer-events: none;
     background: url('img/airplane.svg') center/contain no-repeat;
+    z-index: 999;
   `;
   document.body.append(fly);
 
